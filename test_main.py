@@ -43,13 +43,6 @@ class TestBooksCollector:
         collector.set_book_genre(book_name, rand_genre_from_list_of_genres)
         assert collector.get_book_genre(book_name) == rand_genre_from_list_of_genres
 
-    def test_get_book_genre_search_by_valid_name_successful(self, collector):
-        book_name = 'Книга 1'
-        rand_genre_from_list_of_genres = collector.genre[random.randint(0, len(collector.genre) - 1)]
-        collector.add_new_book(book_name)
-        collector.set_book_genre(book_name, rand_genre_from_list_of_genres)
-        assert collector.get_book_genre(book_name) == rand_genre_from_list_of_genres
-
     def test_get_books_with_specific_genre_two_equals_genres_in_list_get_successful(self, collector):
         name_first_book = 'Книга номер 1'
         name_second_book = 'Книга номер 2'
@@ -112,12 +105,5 @@ class TestBooksCollector:
         collector.set_book_genre(book_name, book_genre)
         collector.add_book_in_favorites(book_name)
         collector.delete_book_from_favorites(book_name)
-        assert len(collector.favorites) == 0
+        assert len(collector.get_list_of_favorites_books()) == 0
 
-    def test_get_list_of_favorites_books_one_book_in_list_successful(self, collector):
-        book_name = 'Книга номер 2'
-        book_genre = collector.genre[0]
-        collector.add_new_book(book_name)
-        collector.set_book_genre(book_name, book_genre)
-        collector.add_book_in_favorites(book_name)
-        assert collector.get_list_of_favorites_books() == [book_name]
